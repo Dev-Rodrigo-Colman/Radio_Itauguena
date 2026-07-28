@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radio Itaugüeña 90.9 FM</title>
+    <!-- Iconos FontAwesome para las redes sociales -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Enlace al archivo CSS externo -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body style="background-image: url(radiofondo.jpg); background-size: cover; background-position: center; background-attachment: fixed;">
+
+    <!-- Encabezado con Logotipo y Título -->
+    <header>
+        <div class="logo-block">
+            <i class="fa-solid fa-microphone-lines"></i>
+            <h1>Radio Itaugüeña</h1>
+            <span>90.9 FM</span>
+        </div>
+        
+        <div class="title-block">
+            <div class="title-text">
+            Radio <span>Itaugüeña 90.9</span> <i class="fa-solid fa-broadcast-tower"></i>
+        </div>
+        <div class="player-container">
+        <button id="playBtn" class="playBtn" title="Escuchar en vivo">
+            <i class="fa-solid fa-play" id="playIcon"></i>
+        </button>
+        <!--Etiqueta de audio reemplazar por url src por el enlace de streaming-->
+        <span id="btnText" class="player-status">Escuchar en vivo</span>
+        <audio id="radioStream" src="HTTPS"></audio>
+          </div>
+        </div>
+    </header>
+
+    <!-- Contenido Principal: Planilla de Programación -->
+    <main>
+        <div class="table-card">
+            <div class="table-title">PROGRAMACIÓN SEMANAL</div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Locutor(a)</th>
+                        <th>Programa</th>
+                        <th>Horario</th>
+                        <th>Descripción</th>
+                        <th>Estilo Musical</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="locutor">Luis Fernández</td>
+                        <td class="programa">El Despertador</td>
+                        <td class="horario">06:00 - 09:00</td>
+                        <td class="descripcion">Noticias locales, clima y humor matutino.</td>
+                        <td class="estilo">Tropical & Folk.</td>
+                    </tr>
+                    <tr>
+                        <td class="locutor">Ana Ramírez</td>
+                        <td class="programa">Mañana Activa</td>
+                        <td class="horario">09:00 - 12:00</td>
+                        <td class="descripcion">Entrevistas, deportes y música variada.</td>
+                        <td class="estilo">Pop Latino & Baladas.</td>
+                    </tr>
+                    <tr>
+                        <td class="locutor">Carlos Benítez</td>
+                        <td class="programa">Tarde Informativa</td>
+                        <td class="horario">12:00 - 14:00</td>
+                        <td class="descripcion">Resumen de noticias, análisis y reportes.</td>
+                        <td class="estilo">Instrumental & Folk.</td>
+                    </tr>
+                    <tr>
+                        <td class="locutor">María Gómez</td>
+                        <td class="programa">Hits 90.9</td>
+                        <td class="horario">14:00 - 17:00</td>
+                        <td class="descripcion">Los mejores éxitos nacionales e internacionales.</td>
+                        <td class="estilo">Pop & Rock</td>
+                    </tr>
+                    <tr>
+                        <td class="locutor">Juan Paredes</td>
+                        <td class="programa">Voces del Folklore</td>
+                        <td class="horario">17:00 - 19:00</td>
+                        <td class="descripcion">Música paraguaya, artistas locales y cultura.</td>
+                        <td class="estilo">Folklore Paraguayo & Guarania.</td>
+                    </tr>
+                    <tr>
+                        <td class="locutor">Elena Gonzalez</td>
+                        <td class="programa">Tejiendo Historias</td>
+                        <td class="horario">19:00 - 22:00</td>
+                        <td class="descripcion">Dedicatorias, romance y selección musical.</td>
+                        <td class="estilo">Baladas & Romántico</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Pie de Página -->
+    <footer>
+        <div class="footer-logo">
+            <i class="fa-solid fa-microphone-lines"></i>
+            <div>
+                <strong>RADIO ITAUGÜEÑA</strong>
+                <span>90.9 FM</span>
+            </div>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#">Inicio</a></li>
+            <li><a href="#">información</a></li>
+            <li><a href="#">Ofertas</a></li>
+            <li><a href="#">Anuncios</a></li>
+            <li><a href="#">Contacto</a></li>
+        </ul>
+
+        <div class="social-icons">
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#"><i class="fa-brands fa-instagram"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#"><i class="fa-brands fa-tiktok"></i></a>
+        </div>
+    </footer>
+
+</body>
+</html>

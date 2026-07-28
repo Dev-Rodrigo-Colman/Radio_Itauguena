@@ -1,0 +1,371 @@
+:root {
+    --azul-marino: #0a2558;
+    --azul-marino-oscuro: #06183b;
+    --dorado: #d4af37;
+    --dorado-brillo: #f3e5ab;
+    --blanco: #ffffff;
+    --gris-claro: #f4f6f9;
+    --texto-oscuro: #222222;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    /* Fondo de ñandutí con una capa semi-transparente para asegurar legibilidad */
+    background-image: linear-gradient(rgba(255, 255, 255, 0.30), rgba(255, 255, 255, 0.30)), url('radiofondo.jpg');
+    background-size: cover;          /* Ajusta la imagen para cubrir toda la pantalla */
+    background-position: center;      /* Centra la imagen */
+    background-repeat: no-repeat;     /* Evita que la imagen se repita */
+    background-attachment: fixed;    /* Mantiene el fondo fijo al hacer scroll */
+    color: var(--texto-oscuro);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 1. Hace que la tarjeta principal sea semitransparente con efecto de desenfoque */
+.table-card {
+    border: 3px solid var(--dorado);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    background-color: rgba(255, 255, 255, 0.35); /* Transparencia al 75% */
+    backdrop-filter: blur(5px); /* Opcional: le da un toque elegante al fondo */
+}
+
+/* 2. Quita los fondos blancos sólidos de la tabla y sus celdas */
+table, tr, td {
+    background-color: transparent !important;
+}
+
+/* 3. Ajusta las filas intercaladas para que sean suavemente transparentes */
+tbody tr:nth-child(even) {
+    background-color: rgba(10, 37, 88, 0.05) !important; /* Azul marino muy tenue */
+}
+
+tbody tr:hover {
+    background-color: rgba(212, 175, 55, 0.2) !important; /* Destello dorado al pasar el mouse */
+}
+/* --- ENCABEZADO / HEADER --- */
+header {
+    background-color: var(--azul-marino);
+    padding: 20px 40px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Bloque del Logotipo (Arriba Izquierda) */
+.logo-block {
+    background: linear-gradient(135deg, var(--azul-marino), var(--azul-marino-oscuro));
+    border: 2px solid var(--dorado);
+    border-radius: 8px;
+    padding: 10px 20px;
+    text-align: center;
+    color: var(--dorado);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    min-width: 160px;
+}
+
+.logo-block i {
+    font-size: 2rem;
+    margin-bottom: 5px;
+}
+
+.logo-block h1 {
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--blanco);
+    margin: 0;
+}
+
+.logo-block span {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--dorado);
+}
+
+/* Bloque Rectangular del Título al lado del Logo */
+.title-block {
+    flex-grow: 1;
+    background-color: var(--azul-marino-oscuro);
+    border: 2px solid var(--dorado);
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    color: var(--blanco);
+    font-size: 1.8rem;
+    font-weight: bold;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.title-block i {
+    font-size: 1.2rem;
+}
+
+.title-block span {
+    color: var(--dorado);
+}
+
+/* --- CONTENIDO PRINCIPAL --- */
+main {
+    flex: 1;
+    max-width: 1200px;
+    width: 100%;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Contenedor de la Planilla */
+.table-card {
+    border: 3px solid var(--dorado);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    background-color: var(--blanco);
+}
+
+.table-title {
+    background-color: var(--azul-marino);
+    color: var(--dorado);
+    text-align: center;
+    padding: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    border-bottom: 2px solid var(--dorado);
+}
+
+/* Tabla de Programación */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th {
+    background-color: var(--azul-marino-oscuro);
+    color: var(--dorado);
+    padding: 15px;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid var(--dorado);
+    border-right: 1px solid rgba(212, 175, 55, 0.3);
+}
+
+th:last-child {
+    border-right: none;
+}
+
+td {
+    padding: 14px 15px;
+    border-bottom: 1px solid #e0e0e0;
+    border-right: 1px solid #e0e0e0;
+    font-size: 0.95rem;
+}
+
+td:last-child {
+    border-right: none;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9fbfd;
+}
+
+tbody tr:hover {
+    background-color: #f0f4f9;
+}
+
+/* Clases de las columnas */
+.locutor { font-weight: bold; color: var(--azul-marino); }
+.programa { font-weight: 600; }
+.horario { font-weight: bold; color: var(--azul-marino-oscuro); white-space: nowrap; }
+.descripcion { text-align: left; font-size: 0.9rem; color: #444; }
+.estilo { font-style: italic; color: #555; }
+
+/* --- PIE DE PÁGINA / FOOTER --- */
+footer {
+    border-top: 2px solid var(--dorado);
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--blanco);
+    margin-top: auto;
+}
+
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: var(--azul-marino);
+    padding: 8px 15px;
+    border-radius: 6px;
+    border: 1px solid var(--dorado);
+}
+
+.footer-logo i {
+    color: var(--dorado);
+    font-size: 1.5rem;
+}
+
+.footer-logo div {
+    line-height: 1.1;
+}
+
+.footer-logo strong {
+    color: var(--blanco);
+    font-size: 0.85rem;
+    display: block;
+}
+
+.footer-logo span {
+    color: var(--dorado);
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--azul-marino);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--dorado);
+}
+
+.social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icons a {
+    width: 35px;
+    height: 35px;
+    background-color: var(--azul-marino);
+    color: var(--dorado);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    border: 1px solid var(--dorado);
+    transition: transform 0.2s, background-color 0.2s;
+}
+
+.social-icons a:hover {
+    transform: scale(1.1);
+    background-color: var(--dorado);
+    color: var(--azul-marino);
+}
+
+/* Adaptabilidad para teléfonos y pantallas pequeñas */
+@media (max-width: 768px) {
+    header { flex-direction: column; }
+    .title-block { width: 100%; font-size: 1.3rem; }
+    footer { flex-direction: column; gap: 20px; text-align: center; }
+    .nav-links { flex-wrap: wrap; justify-content: center; }
+    .table-card { overflow-x: auto; }
+}
+  /* --- CONTENEDOR DEL REPRODUCTOR --- */
+.player-container {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    overflow: visible !important; /* Permite que la onda se extienda fuera de los bordes */
+}
+
+/* --- BOTÓN REDONDO PRINCIPAL --- */
+.play-btn {
+    width: 65px;
+    height: 65px;
+    border-radius: 50% !important;
+    background: linear-gradient(135deg, #f3e5ab, var(--dorado), #b89228);
+    color: var(--azul-marino-oscuro);
+    border: 3px solid #ffffff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    
+    /* Animación de pulso directo usando Box-Shadow */
+    -webkit-animation: pulsoEfecto 1.6s infinite;
+    animation: pulsoEfecto 1.6s infinite;
+    transition: transform 0.2s ease;
+}
+
+/* Ajuste del icono dentro del círculo */
+.play-btn i {
+    font-size: 1.4rem;
+    pointer-events: none;
+}
+
+.play-btn i.fa-play {
+    margin-left: 4px; /* Alineación óptica del triángulo */
+}
+
+/* --- HOVER --- */
+.play-btn:hover {
+    transform: scale(1.1);
+    background: linear-gradient(135deg, #ffffff, var(--dorado));
+}
+
+/* --- DEFINICIÓN DE LA ANIMACIÓN DE PULSO --- */
+@-webkit-keyframes pulsoEfecto {
+    0% {
+        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.9);
+    }
+    70% {
+        box-shadow: 0 0 0 18px rgba(212, 175, 55, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+    }
+}
+
+@keyframes pulsoEfecto {
+    0% {
+        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.9);
+    }
+    70% {
+        box-shadow: 0 0 0 18px rgba(212, 175, 55, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+    }
+}
+
+/* Texto debajo del botón */
+.player-status {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--dorado);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}

@@ -6,51 +6,43 @@
     --blanco: #ffffff;
     --gris-claro: #f4f6f9;
     --texto-oscuro: #222222;
+
+    --font-titulo: 'Playfair Display', Georgia, serif;
+    --font-texto: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
-    /* Fondo de ñandutí con una capa semi-transparente para asegurar legibilidad */
-    background-image: linear-gradient(rgba(255, 255, 255, 0.30), rgba(255, 255, 255, 0.30)), url('radiofondo.jpg');
-    background-size: cover;          /* Ajusta la imagen para cubrir toda la pantalla */
-    background-position: center;      /* Centra la imagen */
-    background-repeat: no-repeat;     /* Evita que la imagen se repita */
-    background-attachment: fixed;    /* Mantiene el fondo fijo al hacer scroll */
+    font-family: var(--font-texto);
+    /* Fondo con motivo ñandutí, con una capa semitransparente para asegurar legibilidad */
+    background-image: linear-gradient(rgba(6, 24, 59, 0.55), rgba(6, 24, 59, 0.55)), url('radiofondo.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     color: var(--texto-oscuro);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
 }
 
-/* 1. Hace que la tarjeta principal sea semitransparente con efecto de desenfoque */
-.table-card {
-    border: 3px solid var(--dorado);
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    background-color: rgba(255, 255, 255, 0.35); /* Transparencia al 75% */
-    backdrop-filter: blur(5px); /* Opcional: le da un toque elegante al fondo */
+/* --- DIVISOR DECORATIVO ESTILO ÑANDUTÍ --- */
+.nandu-divider {
+    height: 22px;
+    width: 100%;
+    background-color: var(--azul-marino-oscuro);
+    background-image:
+        radial-gradient(circle, var(--dorado) 2.4px, transparent 2.6px);
+    background-size: 22px 22px;
+    background-position: center;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
-/* 2. Quita los fondos blancos sólidos de la tabla y sus celdas */
-table, tr, td {
-    background-color: transparent !important;
-}
-
-/* 3. Ajusta las filas intercaladas para que sean suavemente transparentes */
-tbody tr:nth-child(even) {
-    background-color: rgba(10, 37, 88, 0.05) !important; /* Azul marino muy tenue */
-}
-
-tbody tr:hover {
-    background-color: rgba(212, 175, 55, 0.2) !important; /* Destello dorado al pasar el mouse */
-}
 /* --- ENCABEZADO / HEADER --- */
 header {
     background-color: var(--azul-marino);
@@ -58,10 +50,9 @@ header {
     display: flex;
     align-items: center;
     gap: 20px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
-/* Bloque del Logotipo (Arriba Izquierda) */
 .logo-block {
     background: linear-gradient(135deg, var(--azul-marino), var(--azul-marino-oscuro));
     border: 2px solid var(--dorado);
@@ -69,7 +60,7 @@ header {
     padding: 10px 20px;
     text-align: center;
     color: var(--dorado);
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
     min-width: 160px;
 }
 
@@ -79,7 +70,8 @@ header {
 }
 
 .logo-block h1 {
-    font-size: 1.1rem;
+    font-family: var(--font-titulo);
+    font-size: 1.15rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     color: var(--blanco);
@@ -92,7 +84,6 @@ header {
     color: var(--dorado);
 }
 
-/* Bloque Rectangular del Título al lado del Logo */
 .title-block {
     flex-grow: 1;
     background-color: var(--azul-marino-oscuro);
@@ -101,20 +92,30 @@ header {
     padding: 15px;
     text-align: center;
     color: var(--blanco);
-    font-size: 1.8rem;
-    font-weight: bold;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.title-text {
+    font-family: var(--font-titulo);
+    font-size: 1.9rem;
+    font-weight: 700;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
 }
 
-.title-block i {
+.title-text i {
     font-size: 1.2rem;
+    color: var(--dorado);
 }
 
-.title-block span {
+.title-text span {
     color: var(--dorado);
 }
 
@@ -125,29 +126,45 @@ main {
     width: 100%;
     margin: 40px auto;
     padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
 }
 
-/* Contenedor de la Planilla */
+/* Grilla: tabla + barra lateral publicitaria */
+.content-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 30px;
+    align-items: start;
+}
+
+/* --- TARJETA DE PROGRAMACIÓN --- */
 .table-card {
     border: 3px solid var(--dorado);
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-    background-color: var(--blanco);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(6px);
 }
 
 .table-title {
+    font-family: var(--font-titulo);
     background-color: var(--azul-marino);
     color: var(--dorado);
     text-align: center;
-    padding: 15px;
+    padding: 16px;
     font-size: 1.5rem;
-    font-weight: bold;
+    font-weight: 700;
     letter-spacing: 2px;
     border-bottom: 2px solid var(--dorado);
 }
 
-/* Tabla de Programación */
+.table-scroll {
+    overflow-x: auto;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -158,11 +175,12 @@ th {
     background-color: var(--azul-marino-oscuro);
     color: var(--dorado);
     padding: 15px;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 1px;
     border-bottom: 2px solid var(--dorado);
     border-right: 1px solid rgba(212, 175, 55, 0.3);
+    white-space: nowrap;
 }
 
 th:last-child {
@@ -173,7 +191,8 @@ td {
     padding: 14px 15px;
     border-bottom: 1px solid #e0e0e0;
     border-right: 1px solid #e0e0e0;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
+    background-color: transparent;
 }
 
 td:last-child {
@@ -181,24 +200,108 @@ td:last-child {
 }
 
 tbody tr:nth-child(even) {
-    background-color: #f9fbfd;
+    background-color: rgba(10, 37, 88, 0.045);
 }
 
 tbody tr:hover {
-    background-color: #f0f4f9;
+    background-color: rgba(212, 175, 55, 0.18);
 }
 
-/* Clases de las columnas */
-.locutor { font-weight: bold; color: var(--azul-marino); }
+.locutor { font-weight: 700; color: var(--azul-marino); }
 .programa { font-weight: 600; }
-.horario { font-weight: bold; color: var(--azul-marino-oscuro); white-space: nowrap; }
-.descripcion { text-align: left; font-size: 0.9rem; color: #444; }
+.horario { font-weight: 700; color: var(--azul-marino-oscuro); white-space: nowrap; }
+.descripcion { text-align: left; font-size: 0.88rem; color: #444; }
 .estilo { font-style: italic; color: #555; }
+
+/* --- ESPACIOS PUBLICITARIOS --- */
+.ad-slot {
+    background: rgba(255, 255, 255, 0.9);
+    border: 2px dashed var(--dorado);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: var(--azul-marino);
+    padding: 18px;
+    gap: 6px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ad-slot:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+}
+
+.ad-label {
+    font-family: var(--font-titulo);
+    font-weight: 700;
+    color: var(--dorado);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-size: 0.85rem;
+    background-color: var(--azul-marino);
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.ad-slot p {
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.ad-banner-top,
+.ad-banner-bottom {
+    min-height: 110px;
+    width: 100%;
+}
+
+.ad-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ad-sidebar .ad-slot {
+    min-height: 180px;
+}
+
+.ad-slot-cta {
+    background: linear-gradient(135deg, var(--azul-marino), var(--azul-marino-oscuro));
+    color: var(--blanco);
+    border: 2px solid var(--dorado);
+}
+
+.ad-slot-cta .ad-label {
+    background-color: var(--dorado);
+    color: var(--azul-marino-oscuro);
+}
+
+.ad-slot-cta p {
+    color: var(--dorado-brillo);
+}
+
+.ad-btn {
+    margin-top: 6px;
+    background-color: var(--dorado);
+    color: var(--azul-marino-oscuro);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.85rem;
+    padding: 8px 18px;
+    border-radius: 20px;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.ad-btn:hover {
+    background-color: var(--dorado-brillo);
+    transform: scale(1.05);
+}
 
 /* --- PIE DE PÁGINA / FOOTER --- */
 footer {
-    border-top: 2px solid var(--dorado);
-    padding: 20px 40px;
+    padding: 24px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -226,6 +329,7 @@ footer {
 }
 
 .footer-logo strong {
+    font-family: var(--font-titulo);
     color: var(--blanco);
     font-size: 0.85rem;
     display: block;
@@ -280,29 +384,20 @@ footer {
     color: var(--azul-marino);
 }
 
-/* Adaptabilidad para teléfonos y pantallas pequeñas */
-@media (max-width: 768px) {
-    header { flex-direction: column; }
-    .title-block { width: 100%; font-size: 1.3rem; }
-    footer { flex-direction: column; gap: 20px; text-align: center; }
-    .nav-links { flex-wrap: wrap; justify-content: center; }
-    .table-card { overflow-x: auto; }
-}
-  /* --- CONTENEDOR DEL REPRODUCTOR --- */
+/* --- CONTENEDOR DEL REPRODUCTOR --- */
 .player-container {
-    margin-top: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 8px;
-    overflow: visible !important; /* Permite que la onda se extienda fuera de los bordes */
+    overflow: visible;
 }
 
 /* --- BOTÓN REDONDO PRINCIPAL --- */
 .play-btn {
     width: 65px;
     height: 65px;
-    border-radius: 50% !important;
+    border-radius: 50%;
     background: linear-gradient(135deg, #f3e5ab, var(--dorado), #b89228);
     color: var(--azul-marino-oscuro);
     border: 3px solid #ffffff;
@@ -312,40 +407,22 @@ footer {
     align-items: center;
     justify-content: center;
     outline: none;
-    
-    /* Animación de pulso directo usando Box-Shadow */
-    -webkit-animation: pulsoEfecto 1.6s infinite;
     animation: pulsoEfecto 1.6s infinite;
     transition: transform 0.2s ease;
 }
 
-/* Ajuste del icono dentro del círculo */
 .play-btn i {
     font-size: 1.4rem;
     pointer-events: none;
 }
 
 .play-btn i.fa-play {
-    margin-left: 4px; /* Alineación óptica del triángulo */
+    margin-left: 4px;
 }
 
-/* --- HOVER --- */
 .play-btn:hover {
     transform: scale(1.1);
     background: linear-gradient(135deg, #ffffff, var(--dorado));
-}
-
-/* --- DEFINICIÓN DE LA ANIMACIÓN DE PULSO --- */
-@-webkit-keyframes pulsoEfecto {
-    0% {
-        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.9);
-    }
-    70% {
-        box-shadow: 0 0 0 18px rgba(212, 175, 55, 0);
-    }
-    100% {
-        box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
-    }
 }
 
 @keyframes pulsoEfecto {
@@ -360,7 +437,6 @@ footer {
     }
 }
 
-/* Texto debajo del botón */
 .player-status {
     font-size: 0.85rem;
     font-weight: bold;
@@ -368,4 +444,32 @@ footer {
     letter-spacing: 1px;
     text-transform: uppercase;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* --- ADAPTABILIDAD --- */
+@media (max-width: 900px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+    }
+    .title-block {
+        width: 100%;
+    }
+    .title-text {
+        font-size: 1.4rem;
+    }
+    footer {
+        flex-direction: column;
+        gap: 20px;
+        text-align: center;
+    }
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }

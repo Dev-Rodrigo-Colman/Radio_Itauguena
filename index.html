@@ -43,7 +43,7 @@
 
     <!-- Sección Hero con el eslogan -->
     <section class="hero" id="inicio">
-        <p class="hero-slogan">"Una radio identificada con su pueblo y con su gente."</p>
+        <p class="hero-slogan">"Una radio identificada con su pueblo, con su gente."</p>
         <p class="hero-text">La voz que acompaña a la comunidad con información, entretenimiento, música y el compromiso de mantener informados a todos los itaugüeños.</p>
     </section>
 
@@ -201,6 +201,25 @@
     <!-- Divisor decorativo tipo ñandutí -->
     <div class="nandu-divider" aria-hidden="true"></div>
 
+    <!-- Sección Comentarios -->
+    <section class="comments-section" id="comentarios">
+        <div class="section-container comments-content">
+            <h2 class="section-title">Dejanos tu comentario</h2>
+            <p class="comments-lead">¿Tenés alguna sugerencia, saludo o comentario para la radio? Escribinos:</p>
+
+            <form id="commentForm" class="comment-form">
+                <input type="text" id="commentName" placeholder="Tu nombre" required>
+                <textarea id="commentMessage" placeholder="Escribí tu comentario acá..." rows="4" required></textarea>
+                <button type="submit" class="ad-btn comment-submit">
+                    <i class="fa-brands fa-whatsapp"></i> Enviar por WhatsApp
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Divisor decorativo tipo ñandutí -->
+    <div class="nandu-divider" aria-hidden="true"></div>
+
     <!-- Sección Ubicación -->
     <section class="location-section" id="contacto">
         <div class="section-container">
@@ -245,7 +264,7 @@
         <ul class="nav-links">
             <li><a href="#inicio">Inicio</a></li>
             <li><a href="#informacion">Información</a></li>
-            <li><a href="#">Ofertas</a></li>
+            <li><a href="#comentarios">Comentarios</a></li>
             <li><a href="#publicidad">Anuncios</a></li>
             <li><a href="#contacto">Contacto</a></li>
         </ul>
@@ -279,6 +298,22 @@
                 btnText.textContent = 'Escuchar en vivo';
             }
             sonando = !sonando;
+        });
+
+        // Formulario de comentarios -> WhatsApp
+        const commentForm = document.getElementById('commentForm');
+        const numeroWhatsapp = '595984129202'; // 0984 129 202 en formato internacional
+
+        commentForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nombre = document.getElementById('commentName').value.trim();
+            const mensaje = document.getElementById('commentMessage').value.trim();
+
+            const texto = `Hola, soy ${nombre}. Mi comentario para Radio Itaugüeña es: ${mensaje}`;
+            const url = `https://wa.me/${numeroWhatsapp}?text=${encodeURIComponent(texto)}`;
+
+            window.open(url, '_blank');
+            commentForm.reset();
         });
     </script>
 

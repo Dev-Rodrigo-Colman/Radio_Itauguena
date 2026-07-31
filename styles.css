@@ -671,6 +671,72 @@ footer {
     margin-top: 10px;
 }
 
+/* --- COMENTARIOS --- */
+.comments-section {
+    background: linear-gradient(135deg, var(--azul-marino), var(--azul-marino-oscuro));
+}
+
+.comments-content {
+    text-align: center;
+}
+
+.comments-content .section-title {
+    color: var(--dorado);
+}
+
+.comments-content .section-title::after {
+    background-color: var(--blanco);
+}
+
+.comments-lead {
+    color: var(--dorado-brillo);
+    max-width: 600px;
+    margin: 0 auto 28px;
+    line-height: 1.6;
+}
+
+.comment-form {
+    max-width: 550px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.comment-form input,
+.comment-form textarea {
+    font-family: var(--font-texto);
+    font-size: 0.95rem;
+    padding: 14px 16px;
+    border: 2px solid var(--dorado);
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.95);
+    color: var(--texto-oscuro);
+    resize: vertical;
+    outline: none;
+    transition: box-shadow 0.2s ease;
+}
+
+.comment-form input:focus,
+.comment-form textarea:focus {
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.4);
+}
+
+.comment-submit {
+    align-self: center;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 30px;
+    font-size: 0.95rem;
+    border: none;
+    cursor: pointer;
+}
+
+.comment-submit i {
+    font-size: 1.1rem;
+}
+
 /* --- ADAPTABILIDAD --- */
 @media (max-width: 900px) {
     .content-grid {

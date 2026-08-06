@@ -57,31 +57,18 @@ header {
     background: linear-gradient(135deg, var(--azul-marino), var(--azul-marino-oscuro));
     border: 2px solid var(--dorado);
     border-radius: 8px;
-    padding: 10px 20px;
+    padding: 10px;
     text-align: center;
-    color: var(--dorado);
     box-shadow: 0 0 12px rgba(212, 175, 55, 0.35);
-    min-width: 160px;
 }
 
-.logo-block i {
-    font-size: 2rem;
-    margin-bottom: 5px;
-}
-
-.logo-block h1 {
-    font-family: var(--font-titulo);
-    font-size: 1.15rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--blanco);
-    margin: 0;
-}
-
-.logo-block span {
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: var(--dorado);
+.logo-img {
+    display: block;
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--dorado);
 }
 
 .title-block {
@@ -119,24 +106,60 @@ header {
     color: var(--dorado);
 }
 
+.header-contact {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 4px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(212, 175, 55, 0.4);
+    width: 100%;
+}
+
+.header-contact span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    color: var(--dorado-brillo);
+}
+
+.header-contact i {
+    color: var(--dorado);
+}
+
 /* --- CONTENIDO PRINCIPAL --- */
 main {
     flex: 1;
     max-width: 1200px;
     width: 100%;
-    margin: 40px auto;
-    padding: 0 20px;
+    margin: 0 auto;
+    padding: 0 0 20px;
     display: flex;
     flex-direction: column;
     gap: 30px;
 }
 
-/* Grilla: tabla + barra lateral publicitaria */
-.content-grid {
+/* Grilla de 9 espacios publicitarios */
+.ads-container {
+    padding: 40px 20px 10px;
+}
+
+.ads-container .section-title {
+    margin-bottom: 10px;
+    color: var(--dorado);
+}
+
+.ads-container .section-title::after {
+    background-color: var(--dorado);
+}
+
+.ads-grid {
     display: grid;
-    grid-template-columns: 1fr 300px;
-    gap: 30px;
-    align-items: start;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 30px;
 }
 
 /* --- TARJETA DE PROGRAMACIÓN --- */
@@ -147,6 +170,7 @@ main {
     box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
     background-color: rgba(255, 255, 255, 0.92);
     backdrop-filter: blur(6px);
+    margin: 0 20px;
 }
 
 .table-title {
@@ -226,12 +250,15 @@ tbody tr:hover {
     color: var(--azul-marino);
     padding: 18px;
     gap: 6px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .ad-slot:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+    border-color: #25D366;
 }
 
 .ad-label {
@@ -251,20 +278,8 @@ tbody tr:hover {
     color: #555;
 }
 
-.ad-banner-top,
-.ad-banner-bottom {
-    min-height: 110px;
-    width: 100%;
-}
-
-.ad-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.ad-sidebar .ad-slot {
-    min-height: 180px;
+.ads-grid .ad-slot {
+    min-height: 170px;
 }
 
 .ad-slot-cta {
@@ -291,6 +306,9 @@ tbody tr:hover {
     font-size: 0.85rem;
     padding: 8px 18px;
     border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
@@ -739,8 +757,8 @@ footer {
 
 /* --- ADAPTABILIDAD --- */
 @media (max-width: 900px) {
-    .content-grid {
-        grid-template-columns: 1fr;
+    .ads-grid {
+        grid-template-columns: repeat(2, 1fr);
     }
     .about-grid {
         grid-template-columns: 1fr;
@@ -762,6 +780,9 @@ footer {
     }
     .hero-slogan {
         font-size: 1.5rem;
+    }
+    .ads-grid {
+        grid-template-columns: 1fr;
     }
     footer {
         flex-direction: column;

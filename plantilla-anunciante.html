@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<!--
+    ═══════════════════════════════════════════════════════════════
+    PLANTILLA DE PÁGINA DE ANUNCIANTE — Radio Itaugüeña 90.9 FM
+    ═══════════════════════════════════════════════════════════════
+
+    CÓMO USAR ESTA PLANTILLA PARA UN NUEVO ANUNCIANTE:
+
+    1. Hacé una copia de este archivo con un nombre nuevo, por ejemplo:
+       "publicidad-restaurante-la-parrilla.html"
+
+    2. Reemplazá los textos marcados entre [CORCHETES] por los datos
+       reales del negocio (nombre, descripción, menú, oferta, contacto).
+
+    3. Cambiá la imagen "publicidad-ejemplo-foto.jpg" por una foto real
+       del negocio (subila junto con este archivo al hosting).
+
+    4. Subí el archivo nuevo a la misma carpeta del hosting donde están
+       index.html, styles.css, logo.jpeg, etc.
+
+    5. Andá al index.html, buscá el panel de publicidad que le vendiste
+       a este anunciante, y cambiá su "href" (que hoy apunta a WhatsApp)
+       para que apunte a este archivo nuevo. Ejemplo:
+
+       ANTES: <a class="ad-slot" href="https://wa.me/595984129202?text=...">
+       DESPUÉS: <a class="ad-slot" href="publicidad-restaurante-la-parrilla.html">
+
+    6. Si el negocio no tiene "menú" (por ejemplo es una ferretería o
+       una peluquería), podés borrar la sección de "Menú" y dejar solo
+       la descripción y la oferta, o cambiar "Menú" por "Servicios".
+    ═══════════════════════════════════════════════════════════════
+-->
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Nombre del Negocio] · Publicidad Radio Itaugüeña</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Barra superior para volver a la radio -->
+    <div class="advertiser-topbar">
+        <a href="index.html#publicidad"><i class="fa-solid fa-arrow-left"></i> Volver a Radio Itaugüeña 90.9 FM</a>
+    </div>
+
+    <!-- Encabezado del anunciante -->
+    <section class="advertiser-hero">
+        <span class="tag">Anunciante</span>
+        <h1>[Nombre del Restaurante]</h1>
+        <p>[Breve descripción del negocio: qué tipo de comida ofrece, ambiente, ubicación general, lo que lo hace especial. 2-3 líneas.]</p>
+
+        <img src="publicidad-ejemplo-foto.jpg" alt="[Nombre del Negocio]" class="advertiser-photo">
+    </section>
+
+    <!-- Divisor decorativo tipo ñandutí -->
+    <div class="nandu-divider" aria-hidden="true"></div>
+
+    <!-- Contenido: menú/carta y oferta -->
+    <main style="padding: 40px 20px;">
+        <div class="advertiser-card">
+
+            <h2>Nuestra Carta</h2>
+            <ul class="menu-list">
+                <li class="menu-item">
+                    <span class="item-name">[Plato 1]<span class="item-desc">[Breve descripción del plato]</span></span>
+                    <span class="item-price">Gs. [Precio]</span>
+                </li>
+                <li class="menu-item">
+                    <span class="item-name">[Plato 2]<span class="item-desc">[Breve descripción del plato]</span></span>
+                    <span class="item-price">Gs. [Precio]</span>
+                </li>
+                <li class="menu-item">
+                    <span class="item-name">[Plato 3]<span class="item-desc">[Breve descripción del plato]</span></span>
+                    <span class="item-price">Gs. [Precio]</span>
+                </li>
+                <li class="menu-item">
+                    <span class="item-name">[Bebida o postre]</span>
+                    <span class="item-price">Gs. [Precio]</span>
+                </li>
+            </ul>
+
+            <h2>Oferta Especial</h2>
+            <div class="advertiser-offer">
+                <span class="offer-tag">Solo por tiempo limitado</span>
+                <p>[Detalle de la promoción, por ejemplo: "2x1 en almuerzos ejecutivos de lunes a viernes" o "10% de descuento presentando este anuncio de la radio".]</p>
+            </div>
+
+            <div class="advertiser-contact">
+                <span><i class="fa-solid fa-phone"></i> [Número de teléfono]</span>
+                <span><i class="fa-solid fa-location-dot"></i> [Dirección]</span>
+            </div>
+
+            <div style="text-align:center; margin-top: 25px;">
+                <a href="https://wa.me/595XXXXXXXXX?text=Hola%2C%20vi%20su%20publicidad%20en%20Radio%20Itaugüeña%20y%20quiero%20hacer%20una%20consulta."
+                   target="_blank" rel="noopener" class="ad-btn">
+                    <i class="fa-brands fa-whatsapp"></i> Contactar por WhatsApp
+                </a>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

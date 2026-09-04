@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Radio Itaugüeña 90.9 FM</title>
 
+    <!-- Favicon (ícono en la pestaña del navegador) -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+
+    <!-- Vista previa al compartir el link (WhatsApp, Facebook, etc.) -->
+    <meta property="og:title" content="Radio Itaugüeña 90.9 FM">
+    <meta property="og:description" content="Una radio identificada con su pueblo, con su gente.">
+    <meta property="og:image" content="logo-social.jpg">
+    <meta property="og:type" content="website">
+    <meta name="theme-color" content="#0a2558">
+
     <!-- Iconos FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -46,6 +60,13 @@
     <section class="hero" id="inicio">
         <p class="hero-slogan">"Una radio identificada con su pueblo, con su gente."</p>
         <p class="hero-text">La voz que acompaña a la comunidad con información, entretenimiento, música y el compromiso de mantener informados a todos los itaugüeños.</p>
+
+        <div class="hero-listen">
+            <button id="heroPlayBtn" class="play-btn play-btn-large" title="Descargar app para escuchar en vivo">
+                <i class="fa-solid fa-download"></i>
+            </button>
+            <span class="player-status hero-listen-label">Escuche la radio en vivo aquí</span>
+        </div>
     </section>
 
     <!-- Divisor decorativo tipo ñandutí -->
@@ -58,9 +79,9 @@
         <div class="section-container ads-container">
             <h2 class="section-title">Espacios Publicitarios</h2>
             <div class="ads-grid">
-                <a class="ad-slot" href="plantilla-anunciante.html">
+                <a class="ad-slot" href="https://wa.me/595984129202?text=Hola%2C%20quiero%20consultar%20sobre%20publicidad%20en%20la%20p%C3%A1gina%20de%20Radio%20Itaug%C3%BCe%C3%B1a%2090.9%20FM." target="_blank" rel="noopener">
                     <span class="ad-label">Publicidad</span>
-                    <p>300 x 251 · Tocá para consultar</p>
+                    <p>300 x 250 · Tocá para consultar</p>
                 </a>
                 <a class="ad-slot" href="https://wa.me/595984129202?text=Hola%2C%20quiero%20consultar%20sobre%20publicidad%20en%20la%20p%C3%A1gina%20de%20Radio%20Itaug%C3%BCe%C3%B1a%2090.9%20FM." target="_blank" rel="noopener">
                     <span class="ad-label">Publicidad</span>
@@ -296,11 +317,16 @@
     <script>
         // Control del botón: redirige a la app en Play Store
         const playBtn = document.getElementById('playBtn');
+        const heroPlayBtn = document.getElementById('heroPlayBtn');
 
         // Botón de escuchar en vivo -> redirige a la app en Play Store
         const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.radiosenpy.topfmpy';
 
         playBtn.addEventListener('click', () => {
+            window.open(playStoreUrl, '_blank');
+        });
+
+        heroPlayBtn.addEventListener('click', () => {
             window.open(playStoreUrl, '_blank');
         });
 

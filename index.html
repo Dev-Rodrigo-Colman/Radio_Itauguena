@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Radio Itaugüeña 90.9 FM</title>
+    <meta name="description" content="Radio Itaugüeña 90.9 FM - Una radio identificada con su pueblo, con su gente. Programación variada, noticias, folklore paraguayo y música desde Itauguá, Paraguay.">
+    <meta name="keywords" content="radio itauguena, radio itaugueña 90.9, radio itaugua, radio paraguay, radio fm itaugua">
 
     <!-- Favicon (ícono en la pestaña del navegador) -->
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -29,6 +31,27 @@
 
     <!-- Enlace al archivo CSS externo -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Datos estructurados para Google (ayuda a que aparezca como radio en los resultados) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "RadioStation",
+      "name": "Radio Itaugüeña 90.9 FM",
+      "url": "https://radioitauguena909.com",
+      "logo": "https://radioitauguena909.com/logo.jpeg",
+      "slogan": "Una radio identificada con su pueblo, con su gente.",
+      "telephone": "+595984129202",
+      "email": "radioitauguena909@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Orlando Matteucci",
+        "addressLocality": "Itauguá",
+        "addressCountry": "PY"
+      },
+      "sameAs": []
+    }
+    </script>
 </head>
 <body>
 
@@ -43,10 +66,13 @@
                 Radio <span>Itaugüeña 90.9</span> <i class="fa-solid fa-tower-broadcast"></i>
             </div>
             <div class="player-container">
-                <button id="playBtn" class="play-btn" title="Descargar app para escuchar en vivo">
-                    <i class="fa-solid fa-download" id="playIcon"></i>
+                <button id="playBtn" class="play-btn" title="Escuchar en vivo">
+                    <i class="fa-solid fa-play" id="playIcon"></i>
                 </button>
                 <span id="btnText" class="player-status">Escuchar en vivo</span>
+                <audio id="radioStream" preload="none">
+                    <source src="https://stream.radiosenpy.net:10898" type="audio/mpeg">
+                </audio>
             </div>
             <div class="header-contact">
                 <span><i class="fa-solid fa-phone"></i> 0984 129 202</span>
@@ -62,10 +88,10 @@
         <p class="hero-text">La voz que acompaña a la comunidad con información, entretenimiento, música y el compromiso de mantener informados a todos los itaugüeños.</p>
 
         <div class="hero-listen">
-            <button id="heroPlayBtn" class="play-btn play-btn-large" title="Descargar app para escuchar en vivo">
-                <i class="fa-solid fa-download"></i>
+            <button id="heroPlayBtn" class="play-btn play-btn-large" title="Escuchar en vivo">
+                <i class="fa-solid fa-play" id="heroPlayIcon"></i>
             </button>
-            <span class="player-status hero-listen-label">Escuche la radio en vivo aquí</span>
+            <span class="player-status hero-listen-label" id="heroBtnText">Escuche la radio en vivo aquí</span>
         </div>
     </section>
 
@@ -315,19 +341,53 @@
     </footer>
 
     <script>
-        // Control del botón: redirige a la app en Play Store
+        // Reproductor de radio en vivo
+        const radio = document.getElementById('radioStream');
         const playBtn = document.getElementById('playBtn');
+        const playIcon = document.getElementById('playIcon');
+        const btnText = document.getElementById('btnText');
         const heroPlayBtn = document.getElementById('heroPlayBtn');
+        const heroPlayIcon = document.getElementById('heroPlayIcon');
+        const heroBtnText = document.getElementById('heroBtnText');
 
-        // Botón de escuchar en vivo -> redirige a la app en Play Store
-        const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.radiosenpy.topfmpy';
+        let sonando = false;
 
-        playBtn.addEventListener('click', () => {
-            window.open(playStoreUrl, '_blank');
-        });
+        function actualizarBotones(estado) {
+            // estado: 'play' | 'pause' | 'cargando'
+            const icono = estado === 'play' ? 'fa-pause' : 'fa-play';
+            const texto = estado === 'cargando' ? 'Conectando...' :
+                          estado === 'play' ? 'En vivo ahora' : 'Escuchar en vivo';
 
-        heroPlayBtn.addEventListener('click', () => {
-            window.open(playStoreUrl, '_blank');
+            playIcon.className = 'fa-solid ' + icono;
+            heroPlayIcon.className = 'fa-solid ' + icono;
+            btnText.textContent = texto;
+            heroBtnText.textContent = estado === 'play' ? 'En vivo ahora' : 'Escuche la radio en vivo aquí';
+        }
+
+        function alternarReproduccion() {
+            if (!sonando) {
+                actualizarBotones('cargando');
+                radio.play().then(() => {
+                    actualizarBotones('play');
+                    sonando = true;
+                }).catch(() => {
+                    actualizarBotones('pause');
+                    alert('No se pudo conectar con la radio en este momento. Intentá de nuevo en unos segundos.');
+                });
+            } else {
+                radio.pause();
+                actualizarBotones('pause');
+                sonando = false;
+            }
+        }
+
+        playBtn.addEventListener('click', alternarReproduccion);
+        heroPlayBtn.addEventListener('click', alternarReproduccion);
+
+        // Si el stream se corta solo (problema de red), reflejarlo en los botones
+        radio.addEventListener('error', () => {
+            actualizarBotones('pause');
+            sonando = false;
         });
 
         // Formulario de comentarios -> WhatsApp

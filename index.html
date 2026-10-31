@@ -70,9 +70,7 @@
                     <i class="fa-solid fa-play" id="playIcon"></i>
                 </button>
                 <span id="btnText" class="player-status">Escuchar en vivo</span>
-                <audio id="radioStream" preload="none">
-                    <source src="https://stream.radiosenpy.net:10898/;stream.mp3" type="audio/mpeg">
-                </audio>
+                <audio id="radioStream" preload="none"></audio>
             </div>
             <div class="header-contact">
                 <span><i class="fa-solid fa-phone"></i> 0984 129 202</span>
@@ -92,6 +90,12 @@
                 <i class="fa-solid fa-play" id="heroPlayIcon"></i>
             </button>
             <span class="player-status hero-listen-label" id="heroBtnText">Escuche la radio en vivo aquí</span>
+        </div>
+
+        <div class="visitor-stats">
+            <span><i class="fa-solid fa-users"></i> <span id="statVisitas">—</span> visitas</span>
+            <span class="stat-divider">·</span>
+            <span><i class="fa-solid fa-headphones"></i> <span id="statOyentes">—</span> escuchando ahora</span>
         </div>
     </section>
 
@@ -342,6 +346,8 @@
 
     <script>
         // Reproductor de radio en vivo
+        const STREAM_URL = 'https://stream.radiosenpy.net:10898/;stream.mp3';
+
         const radio = document.getElementById('radioStream');
         const playBtn = document.getElementById('playBtn');
         const playIcon = document.getElementById('playIcon');
@@ -367,15 +373,22 @@
         function alternarReproduccion() {
             if (!sonando) {
                 actualizarBotones('cargando');
+                // Conexión fresca cada vez: evita que quede "atrasado" tras una pausa
+                radio.src = STREAM_URL;
+                radio.load();
                 radio.play().then(() => {
                     actualizarBotones('play');
                     sonando = true;
                 }).catch(() => {
                     actualizarBotones('pause');
+                    radio.removeAttribute('src');
                     alert('No se pudo conectar con la radio en este momento. Intentá de nuevo en unos segundos.');
                 });
             } else {
+                // Cortar la conexión del todo, no solo pausar, para no dejar nada en el buffer
                 radio.pause();
+                radio.removeAttribute('src');
+                radio.load();
                 actualizarBotones('pause');
                 sonando = false;
             }
@@ -386,9 +399,75 @@
 
         // Si el stream se corta solo (problema de red), reflejarlo en los botones
         radio.addEventListener('error', () => {
-            actualizarBotones('pause');
-            sonando = false;
+            if (sonando) {
+                actualizarBotones('pause');
+                sonando = false;
+            }
         });
+
+        // Conexión con el Worker "radio-api" (visitas, oyentes y anuncios editables)
+        // Si Cloudflare te da otra URL para el Worker, cambiala acá:
+        const API_URL = 'https://radio-api.radioitauguena909.workers.dev';
+
+        const statVisitas = document.getElementById('statVisitas');
+        const statOyentes = document.getElementById('statOyentes');
+
+        // Visitas: se suma una sola vez por día en cada dispositivo
+        const hoy = new Date().toLocaleDateString('en-CA', { timeZone: 'America/Asuncion' });
+        let yaContada = false;
+        try { yaContada = localStorage.getItem('visita_contada') === hoy; } catch (e) {}
+
+        fetch(API_URL + '/visitas', { method: yaContada ? 'GET' : 'POST' })
+            .then(r => r.json())
+            .then(data => {
+                statVisitas.textContent = data.total.toLocaleString('es-PY');
+                if (!yaContada) { try { localStorage.setItem('visita_contada', hoy); } catch (e) {} }
+            })
+            .catch(() => { statVisitas.textContent = '—'; });
+
+        // Oyentes en vivo: se actualiza solo, cada 30 segundos
+        function actualizarOyentes() {
+            fetch(API_URL + '/oyentes')
+                .then(r => r.json())
+                .then(data => {
+                    statOyentes.textContent = (data.oyentes !== null && data.oyentes !== undefined)
+                        ? data.oyentes.toLocaleString('es-PY')
+                        : '—';
+                })
+                .catch(() => { statOyentes.textContent = '—'; });
+        }
+        actualizarOyentes();
+        setInterval(actualizarOyentes, 30000);
+
+        // Anuncios editables desde el panel del dueño.
+        // Los paneles que ya están en el HTML quedan como respaldo: solo se reemplazan
+        // los espacios que tengan un anuncio vigente cargado en el panel.
+        fetch(API_URL + '/anuncios')
+            .then(r => r.json())
+            .then(lista => {
+                const grid = document.querySelector('.ads-grid');
+                if (!grid || !Array.isArray(lista)) return;
+                const originales = Array.from(grid.children);
+                lista.forEach(a => {
+                    const destino = originales[a.slot - 1];
+                    if (!destino) return;
+                    const conEnlace = typeof a.enlace === 'string' && /^https?:\/\//i.test(a.enlace);
+                    const el = document.createElement(conEnlace ? 'a' : 'div');
+                    el.className = 'ad-slot ad-filled';
+                    if (conEnlace) {
+                        el.href = a.enlace;
+                        el.target = '_blank';
+                        el.rel = 'noopener sponsored';
+                    }
+                    const img = document.createElement('img');
+                    img.src = a.imagen;
+                    img.alt = a.nombre || 'Publicidad';
+                    img.loading = 'lazy';
+                    el.appendChild(img);
+                    grid.replaceChild(el, destino);
+                });
+            })
+            .catch(() => {});
 
         // Formulario de comentarios -> WhatsApp
         const commentForm = document.getElementById('commentForm');

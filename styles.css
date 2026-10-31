@@ -64,8 +64,8 @@ header {
 
 .logo-img {
     display: block;
-    width: 300px;
-    height: 300px;
+    width: 90px;
+    height: 90px;
     object-fit: cover;
     border-radius: 50%;
     box-shadow: 0 0 0 2px var(--dorado);
@@ -282,6 +282,23 @@ tbody tr:hover {
     min-height: 170px;
 }
 
+/* Panel con un anuncio cargado desde el panel del dueño (imagen 6:5, igual al formato 300 x 250) */
+.ads-grid .ad-filled {
+    padding: 0;
+    min-height: 0;
+    aspect-ratio: 6 / 5;
+    overflow: hidden;
+    border-style: solid;
+    background-color: var(--blanco);
+}
+
+.ad-filled img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 .ad-slot-cta {
     background: linear-gradient(135deg, var(--azul-marino), var(--azul-marino-oscuro));
     color: var(--blanco);
@@ -469,6 +486,28 @@ footer {
     text-align: center;
     padding: 55px 20px 40px;
 }
+
+.hero-slogan {
+    font-family: var(--font-titulo);
+    font-style: italic;
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--dorado);
+    max-width: 800px;
+    margin: 0 auto 16px;
+    line-height: 1.35;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}
+
+.hero-text {
+    font-size: 1.05rem;
+    color: var(--blanco);
+    max-width: 680px;
+    margin: 0 auto;
+    line-height: 1.7;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+}
+
 .hero-listen {
     display: flex;
     flex-direction: column;
@@ -493,25 +532,37 @@ footer {
     letter-spacing: 1.5px;
 }
 
-.hero-slogan {
-    font-family: var(--font-titulo);
-    font-style: italic;
-    font-weight: 700;
-    font-size: 2rem;
-    color: var(--dorado);
-    max-width: 800px;
-    margin: 0 auto 16px;
-    line-height: 1.35;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+/* --- VISOR DE VISITAS Y OYENTES EN VIVO --- */
+.visitor-stats {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+    padding: 8px 18px;
+    background-color: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.4);
+    border-radius: 20px;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.hero-text {
-    font-size: 1.05rem;
-    color: var(--blanco);
-    max-width: 680px;
-    margin: 0 auto;
-    line-height: 1.7;
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+.visitor-stats span {
+    font-size: 0.82rem;
+    color: var(--dorado-brillo);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.visitor-stats i {
+    color: var(--dorado);
+}
+
+.stat-divider {
+    color: rgba(212, 175, 55, 0.5);
 }
 
 /* --- CONTENEDORES DE SECCIÓN --- */

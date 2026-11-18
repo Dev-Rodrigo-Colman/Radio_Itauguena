@@ -1,0 +1,18 @@
+{
+  "id": "/",
+  "name": "Radio Itaugüeña 90.9 FM",
+  "short_name": "Itaugüeña 90.9",
+  "description": "La voz de Itauguá. Escuchá Radio Itaugüeña 90.9 FM en vivo.",
+  "lang": "es",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#0a2558",
+  "categories": ["music", "news", "entertainment"],
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

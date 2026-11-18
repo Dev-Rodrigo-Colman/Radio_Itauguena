@@ -1049,6 +1049,211 @@ footer {
     margin-bottom: 20px !important;
 }
 
+/* --- BOTÓN DE MODO OSCURO --- */
+.tema-btn {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    z-index: 1000;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    border: 2px solid var(--dorado);
+    background-color: var(--azul-marino);
+    color: var(--dorado);
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.tema-btn:hover {
+    background-color: var(--dorado);
+    color: var(--azul-marino-oscuro);
+    transform: scale(1.08);
+}
+
+.tema-btn:focus-visible {
+    outline: 3px solid var(--dorado-brillo);
+    outline-offset: 3px;
+}
+
+/* --- MODO OSCURO (paleta del logo: negro, rojo, azul y dorado) --- */
+html[data-tema="oscuro"] {
+    --azul-marino: #14141b;
+    --azul-marino-oscuro: #000000;
+    --gris-claro: #1d1d27;
+    --texto-oscuro: #ececf1;
+    color-scheme: dark;
+}
+
+html[data-tema="oscuro"] body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.84), rgba(0, 0, 0, 0.84)), url('radiofondo.jpg');
+}
+
+html[data-tema="oscuro"] .publicidad-section,
+html[data-tema="oscuro"] .comments-section,
+html[data-tema="oscuro"] .location-info,
+html[data-tema="oscuro"] .advertiser-hero,
+html[data-tema="oscuro"] .ad-slot-cta {
+    background: linear-gradient(135deg, #5a0f1b, #0d1f4a);
+}
+
+html[data-tema="oscuro"] .table-card,
+html[data-tema="oscuro"] .about-section,
+html[data-tema="oscuro"] .location-section,
+html[data-tema="oscuro"] .advertiser-card {
+    background-color: rgba(16, 16, 22, 0.94);
+}
+
+html[data-tema="oscuro"] .table-title {
+    background-color: #7d1623;
+    color: var(--dorado-brillo);
+}
+
+html[data-tema="oscuro"] td {
+    border-bottom-color: rgba(255, 255, 255, 0.12);
+    border-right-color: rgba(255, 255, 255, 0.12);
+}
+
+html[data-tema="oscuro"] tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+html[data-tema="oscuro"] .locutor {
+    color: var(--dorado-brillo);
+}
+
+html[data-tema="oscuro"] .programa {
+    color: #ffffff;
+}
+
+html[data-tema="oscuro"] .horario {
+    color: var(--dorado-brillo);
+}
+
+html[data-tema="oscuro"] .descripcion {
+    color: #c9c9d3;
+}
+
+html[data-tema="oscuro"] .estilo {
+    color: #b5b5c2;
+}
+
+html[data-tema="oscuro"] .ad-slot {
+    background: rgba(16, 16, 22, 0.92);
+    color: var(--dorado-brillo);
+}
+
+html[data-tema="oscuro"] .ad-slot p {
+    color: #c9c9d3;
+}
+
+html[data-tema="oscuro"] .ads-grid .ad-filled {
+    background-color: var(--blanco);
+}
+
+html[data-tema="oscuro"] .ad-slot-cta {
+    color: var(--blanco);
+}
+
+html[data-tema="oscuro"] .ad-slot-cta p {
+    color: var(--dorado-brillo);
+}
+
+html[data-tema="oscuro"] .section-title {
+    color: var(--dorado);
+}
+
+html[data-tema="oscuro"] .about-block h3,
+html[data-tema="oscuro"] .services-block h3,
+html[data-tema="oscuro"] .advertiser-card h2 {
+    color: var(--dorado-brillo);
+}
+
+html[data-tema="oscuro"] .about-block p {
+    color: #d8d8e0;
+}
+
+html[data-tema="oscuro"] .services-list li {
+    color: var(--dorado-brillo);
+}
+
+html[data-tema="oscuro"] footer {
+    background-color: #0b0b0f;
+    border-top: 2px solid var(--dorado);
+}
+
+html[data-tema="oscuro"] .nav-links a {
+    color: var(--dorado-brillo);
+}
+
+html[data-tema="oscuro"] .nav-links a:hover {
+    color: var(--dorado);
+}
+
+html[data-tema="oscuro"] .social-icons a {
+    background-color: #1d1d27;
+    border: 1px solid var(--dorado);
+}
+
+html[data-tema="oscuro"] .social-icons a:hover {
+    background-color: var(--dorado);
+    color: var(--azul-marino-oscuro);
+}
+
+html[data-tema="oscuro"] .comment-form input,
+html[data-tema="oscuro"] .comment-form textarea {
+    background-color: rgba(20, 20, 28, 0.95);
+    color: var(--texto-oscuro);
+}
+
+html[data-tema="oscuro"] .item-name,
+html[data-tema="oscuro"] .item-price,
+html[data-tema="oscuro"] .advertiser-contact {
+    color: #ececf1;
+}
+
+html[data-tema="oscuro"] .item-desc {
+    color: #b5b5c2;
+}
+
+html[data-tema="oscuro"] .menu-item {
+    border-bottom-color: rgba(255, 255, 255, 0.18);
+}
+
+html[data-tema="oscuro"] .advertiser-offer p {
+    color: var(--dorado-brillo);
+}
+
+html[data-tema="oscuro"] .advertiser-contact {
+    border-top-color: rgba(255, 255, 255, 0.15);
+}
+
+html[data-tema="oscuro"] .legal-text p,
+html[data-tema="oscuro"] .legal-text li {
+    color: #d8d8e0;
+}
+
+html[data-tema="oscuro"] .legal-text strong {
+    color: var(--blanco);
+}
+
+html[data-tema="oscuro"] .legal-text a {
+    color: var(--dorado-brillo);
+}
+
+html[data-tema="oscuro"] .legal-text a:hover {
+    color: var(--dorado);
+}
+
+html[data-tema="oscuro"] .legal-fecha {
+    color: #aaaaae !important;
+}
+
 /* --- ADAPTABILIDAD --- */
 @media (max-width: 900px) {
     .ads-grid {

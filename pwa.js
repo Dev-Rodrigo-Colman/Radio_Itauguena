@@ -7,42 +7,76 @@
     });
   }
 
+  var ua = navigator.userAgent;
+  var esIOS = /iphone|ipad|ipod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var esAndroid = /android/i.test(ua);
+  var evento = null;
+  var btn = null;
+
   function yaInstalada() {
     return (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
   }
-  var esIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-  var evento = null;
+
+  // 2) Se escucha desde el principio: Chrome puede avisar antes de que cargue toda la página
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    evento = e;
+  });
+  window.addEventListener('appinstalled', function () {
+    evento = null;
+    if (btn) btn.hidden = true;
+  });
 
   document.addEventListener('DOMContentLoaded', function () {
-    var btn = document.getElementById('instalarBtn');
+    btn = document.getElementById('instalarBtn');
     if (!btn || yaInstalada()) return;
-
-    // 2) Android y PC (Chrome, Edge, Samsung Internet): instalación directa
-    window.addEventListener('beforeinstallprompt', function (e) {
-      e.preventDefault();
-      evento = e;
-      btn.hidden = false;
-    });
-    window.addEventListener('appinstalled', function () {
-      evento = null;
-      btn.hidden = true;
-    });
-
-    // 3) iPhone y iPad: no hay instalación directa, se muestran los pasos
-    if (esIOS) btn.hidden = false;
+    btn.hidden = false;
 
     btn.addEventListener('click', function () {
       if (evento) {
+        // Instalación directa (Chrome, Edge, Samsung Internet)
         evento.prompt();
-        evento.userChoice.then(function () { evento = null; btn.hidden = true; });
-      } else if (esIOS) {
+        evento.userChoice.then(function () { evento = null; });
+      } else {
         mostrarAyuda();
       }
     });
   });
 
+  // 3) Si el navegador no permite instalar con un toque, se explican los pasos
+  function pasos() {
+    if (esIOS) {
+      return {
+        titulo: 'Instalar la app en tu iPhone',
+        lista: [
+          'Abrí esta página en Safari.',
+          'Tocá el botón Compartir (el cuadrado con una flecha hacia arriba).',
+          'Elegí "Agregar a pantalla de inicio" y tocá "Agregar".'
+        ]
+      };
+    }
+    if (esAndroid) {
+      return {
+        titulo: 'Instalar la app en tu celular',
+        lista: [
+          'Tocá el menú ⋮ del navegador (arriba a la derecha).',
+          'Elegí "Instalar app" o "Agregar a pantalla de inicio".',
+          'Confirmá. Si no ves esa opción, abrí la página en Chrome, no desde WhatsApp o Facebook.'
+        ]
+      };
+    }
+    return {
+      titulo: 'Instalar la app en tu computadora',
+      lista: [
+        'Usá Google Chrome o Microsoft Edge.',
+        'Buscá el ícono de instalar en la barra de direcciones, a la derecha. Si no está, abrí el menú ⋮ y elegí "Instalar Radio Itaugüeña".'
+      ]
+    };
+  }
+
   function mostrarAyuda() {
     if (document.getElementById('pwaAyuda')) return;
+    var p = pasos();
     var fondo = document.createElement('div');
     fondo.className = 'pwa-ayuda';
     fondo.id = 'pwaAyuda';
@@ -54,11 +88,9 @@
     caja.className = 'pwa-ayuda-caja';
     var h = document.createElement('h3');
     h.id = 'pwaAyudaTitulo';
-    h.textContent = 'Instalar la app en tu iPhone';
+    h.textContent = p.titulo;
     var ol = document.createElement('ol');
-    ['Tocá el botón Compartir (el cuadrado con una flecha hacia arriba) en la barra de Safari.',
-     'Elegí "Agregar a pantalla de inicio".',
-     'Tocá "Agregar". Listo: la radio queda como una app en tu pantalla.'].forEach(function (t) {
+    p.lista.forEach(function (t) {
       var li = document.createElement('li');
       li.textContent = t;
       ol.appendChild(li);
@@ -67,7 +99,10 @@
     cerrar.type = 'button';
     cerrar.className = 'ad-btn';
     cerrar.textContent = 'Entendido';
-    function quitar() { if (fondo.parentNode) fondo.parentNode.removeChild(fondo); document.removeEventListener('keydown', tecla); }
+    function quitar() {
+      if (fondo.parentNode) fondo.parentNode.removeChild(fondo);
+      document.removeEventListener('keydown', tecla);
+    }
     function tecla(ev) { if (ev.key === 'Escape') quitar(); }
     cerrar.onclick = quitar;
     fondo.addEventListener('click', function (ev) { if (ev.target === fondo) quitar(); });

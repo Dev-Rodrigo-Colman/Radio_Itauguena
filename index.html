@@ -55,7 +55,14 @@
       "sameAs": []
     }
     </script>
+    <!-- App instalable (PWA) -->
+    <link rel="manifest" href="manifest.webmanifest">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Itaugüeña 90.9">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <script src="tema.js"></script>
+    <script src="pwa.js"></script>
 </head>
 <body>
 
@@ -95,6 +102,10 @@
             </button>
             <span class="player-status hero-listen-label" id="heroBtnText">Escuche la radio en vivo aquí</span>
         </div>
+
+        <button type="button" class="instalar-btn" id="instalarBtn" hidden>
+            <i class="fa-solid fa-download"></i> Instalar app
+        </button>
 
         <div class="visitor-stats">
             <span><i class="fa-solid fa-users"></i> <span id="statVisitas">—</span> visitas</span>

@@ -1049,6 +1049,193 @@ footer {
     margin-bottom: 20px !important;
 }
 
+/* --- PANTALLA DE BIENVENIDA --- */
+.splash {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    background-color: var(--azul-marino-oscuro);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    animation: splash-salida 0.5s ease 1.3s forwards;
+}
+
+.splash-logo {
+    width: min(55vw, 240px);
+    height: min(55vw, 240px);
+    border-radius: 50%;
+    border: 3px solid var(--dorado);
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.35);
+    object-fit: cover;
+    animation: splash-entrada 0.7s ease both;
+}
+
+.splash-nombre {
+    font-family: var(--font-titulo);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--blanco);
+    text-align: center;
+    letter-spacing: 1px;
+    animation: splash-entrada 0.7s ease 0.2s both;
+}
+
+.splash-nombre span {
+    display: block;
+    color: var(--dorado);
+    font-size: 1rem;
+    margin-top: 4px;
+}
+
+.sin-splash .splash {
+    display: none;
+}
+
+@keyframes splash-entrada {
+    from { opacity: 0; transform: scale(0.85); }
+    to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes splash-salida {
+    to { opacity: 0; visibility: hidden; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .splash { animation-delay: 0.6s; }
+    .splash-logo, .splash-nombre { animation: none; }
+}
+
+/* --- INSTALAR COMO APP (PWA) --- */
+.instalar-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: 24px;
+    padding: 9px 26px 9px 10px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, var(--dorado-brillo), var(--dorado) 55%, #b8922a);
+    color: var(--azul-marino-oscuro);
+    font-family: var(--font-texto);
+    text-align: left;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    animation: instalar-pulso 2.6s ease-in-out infinite;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.instalar-btn[hidden] {
+    display: none;
+}
+
+.instalar-icono {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--azul-marino-oscuro);
+    color: var(--dorado-brillo);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex: none;
+}
+
+.instalar-texto strong {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.instalar-texto small {
+    display: block;
+    font-size: 0.74rem;
+    font-weight: 500;
+    opacity: 0.8;
+    margin-top: 2px;
+}
+
+.instalar-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    animation: none;
+}
+
+.instalar-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.instalar-btn:focus-visible {
+    outline: 3px solid var(--blanco);
+    outline-offset: 3px;
+}
+
+@keyframes instalar-pulso {
+    0%, 100% { box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), 0 0 0 0 rgba(212, 175, 55, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.5); }
+    50%      { box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35), 0 0 0 10px rgba(212, 175, 55, 0), inset 0 1px 0 rgba(255, 255, 255, 0.5); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .instalar-btn { animation: none; }
+}
+
+.pwa-ayuda {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background-color: rgba(0, 0, 0, 0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.pwa-ayuda-caja {
+    width: 100%;
+    max-width: 420px;
+    background-color: var(--blanco);
+    border-top: 5px solid var(--dorado);
+    border-radius: 12px;
+    padding: 26px 24px;
+    color: var(--azul-marino);
+    text-align: left;
+}
+
+.pwa-ayuda-caja h3 {
+    font-family: var(--font-titulo);
+    font-size: 1.25rem;
+    margin-bottom: 14px;
+}
+
+.pwa-ayuda-caja ol {
+    margin: 0 0 20px 20px;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.pwa-ayuda-caja li {
+    margin-bottom: 8px;
+}
+
+.pwa-ayuda-caja .ad-btn {
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-texto);
+}
+
+html[data-tema="oscuro"] .pwa-ayuda-caja {
+    background-color: #14141b;
+    color: #ececf1;
+}
+
+html[data-tema="oscuro"] .pwa-ayuda-caja h3 {
+    color: var(--dorado-brillo);
+}
+
 /* --- BOTÓN DE MODO OSCURO --- */
 .tema-btn {
     position: fixed;

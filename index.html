@@ -62,9 +62,16 @@
     <meta name="apple-mobile-web-app-title" content="Itaugüeña 90.9">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <script src="tema.js"></script>
+    <script src="splash.js"></script>
     <script src="pwa.js"></script>
 </head>
 <body>
+
+    <!-- Pantalla de bienvenida -->
+    <div class="splash" aria-hidden="true">
+        <img src="logo.jpeg" alt="" class="splash-logo">
+        <p class="splash-nombre">RADIO ITAUGÜEÑA<span>90.9 FM · La voz de Itauguá</span></p>
+    </div>
 
     <!-- Encabezado con Logotipo y Título -->
     <header>
@@ -104,7 +111,8 @@
         </div>
 
         <button type="button" class="instalar-btn" id="instalarBtn" hidden>
-            <i class="fa-solid fa-download"></i> Instalar app
+            <span class="instalar-icono"><i class="fa-solid fa-download" aria-hidden="true"></i></span>
+            <span class="instalar-texto"><strong>Instalar app</strong><small>La radio en tu pantalla</small></span>
         </button>
 
         <div class="visitor-stats">
